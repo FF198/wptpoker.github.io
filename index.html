@@ -1,1 +1,53 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Poker Game</title>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        let scene, camera, renderer;
+
+        // Setup Three.js scene
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // Create a simple poker table (a large plane)
+            const tableGeometry = new THREE.CircleGeometry(5, 32);
+            const tableMaterial = new THREE.MeshBasicMaterial({ color: 0x006400 });
+            const table = new THREE.Mesh(tableGeometry, tableMaterial);
+            table.rotation.x = - Math.PI / 2; // Flat to the camera view
+            scene.add(table);
+
+            // Create camera position
+            camera.position.z = 10;
+
+            // Animation loop
+            animate();
+        }
+
+        // Render the scene
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+
+        init();
+    </script>
+</body>
+</html>
+
 
